@@ -42,7 +42,7 @@ let jumpNumber = 0
 let gravity = 0
 let jumpSpeed = 0
 let list: number[] = []
-jumpSpeed = -50
+jumpSpeed = -75
 gravity = 100
 jumpNumber = 2
 setUp(assets.image`enemy`)
