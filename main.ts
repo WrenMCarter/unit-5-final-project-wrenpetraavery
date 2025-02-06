@@ -2,17 +2,17 @@ function setUp (enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
         enemy = sprites.create(assets.image`enemy`, SpriteKind.Enemy)
         tiles.placeOnTile(enemy, value)
-        tiles.setTileAt(value, assets.tile`myTile`)
+        tiles.setTileAt(value, assets.tile`transparency16`)
     }
     for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
         collectible = sprites.create(assets.image`coin0`, SpriteKind.Food)
         tiles.placeOnTile(collectible, value2)
-        tiles.setTileAt(value2, assets.tile`myTile`)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
     }
     for (let value3 of tiles.getTilesByType(assets.tile`playerTile`)) {
         playerSprite = sprites.create(assets.image`player`, SpriteKind.Player)
         tiles.placeOnTile(playerSprite, value3)
-        tiles.setTileAt(value3, assets.tile`myTile`)
+        tiles.setTileAt(value3, assets.tile`transparency16`)
         controller.moveSprite(playerSprite, 100, 0)
         playerSprite.ay = gravity
         playerSprite.setStayInScreen(true)
@@ -41,13 +41,13 @@ function startLevel () {
         tiles.setCurrentTilemap(tilemap`level1`)
         setUp(assets.image`enemy`)
     } else if (level == 2) {
-        setUp(assets.image`enemy`)
         tiles.setCurrentTilemap(tilemap`level1`)
+        setUp(assets.image`enemy`)
     } else if (level == 3) {
-    	
-    } else {
-        setUp(assets.image`enemy`)
         tiles.setCurrentTilemap(tilemap`level1`)
+        setUp(assets.image`enemy`)
+    } else {
+        game.gameOver(true)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
