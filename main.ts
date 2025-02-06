@@ -1,5 +1,4 @@
 function setUp (enemyImage: Image) {
-    tiles.setCurrentTilemap(tilemap`level1`)
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
         enemy = sprites.create(assets.image`enemy`, SpriteKind.Enemy)
         tiles.placeOnTile(enemy, value)
@@ -26,10 +25,31 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         currentjumps += 1
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`levelTile`, function (sprite, location) {
+    level += 1
+    startLevel()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.confetti, 500)
     info.changeScoreBy(1)
 })
+function startLevel () {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Food)
+    if (level == 1) {
+        tiles.setCurrentTilemap(tilemap`level1`)
+        setUp(assets.image`enemy`)
+    } else if (level == 2) {
+        setUp(assets.image`enemy`)
+        tiles.setCurrentTilemap(tilemap`level1`)
+    } else if (level == 3) {
+    	
+    } else {
+        setUp(assets.image`enemy`)
+        tiles.setCurrentTilemap(tilemap`level1`)
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.fire, 500)
     info.changeScoreBy(-1)
@@ -38,6 +58,7 @@ let currentjumps = 0
 let playerSprite: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
+let level = 0
 let jumpNumber = 0
 let gravity = 0
 let jumpSpeed = 0
@@ -45,7 +66,8 @@ let list: number[] = []
 jumpSpeed = -75
 gravity = 100
 jumpNumber = 2
-setUp(assets.image`enemy`)
+level = 1
+startLevel()
 game.onUpdate(function () {
     if (playerSprite.isHittingTile(CollisionDirection.Bottom)) {
         currentjumps = 0
