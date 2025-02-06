@@ -1,3 +1,16 @@
+function randomCollectible () {
+    list = [
+    sprites.create(assets.image`getlife`, SpriteKind.Food),
+    sprites.create(assets.image`getcollectible`, SpriteKind.Food),
+    sprites.create(assets.image`getcoin`, SpriteKind.Food),
+    sprites.create(assets.image`hi`, SpriteKind.Food)
+    ]
+    return list._pickRandom()
+}
+scene.onOverlapTile(SpriteKind.Player, findKey(), function (sprite, location) {
+    level += 1
+    startLevel()
+})
 function setUp (enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
         enemy = sprites.create(assets.image`enemy`, SpriteKind.Enemy)
@@ -5,7 +18,7 @@ function setUp (enemyImage: Image) {
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
     for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
-        collectible = sprites.create(assets.image`coin0`, SpriteKind.Food)
+        collectible = randomCollectible()
         tiles.placeOnTile(collectible, value2)
         tiles.setTileAt(value2, assets.tile`transparency16`)
     }
@@ -25,13 +38,18 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         currentjumps += 1
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`levelTile`, function (sprite, location) {
-    level += 1
-    startLevel()
-})
+function findKey () {
+    if (level == 1) {
+        return assets.image`key1`
+    } else if (level == 2) {
+        return assets.image`key2`
+    } else {
+        return assets.image`key3`
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.confetti, 500)
-    info.changeScoreBy(1)
+    info.changeLifeBy(1)
 })
 function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
@@ -39,34 +57,36 @@ function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
     if (level == 1) {
         tiles.setCurrentTilemap(tilemap`level1`)
-        setUp(assets.image`enemy`)
+        setUp(assets.image`enemy1`)
     } else if (level == 2) {
         tiles.setCurrentTilemap(tilemap`level1`)
-        setUp(assets.image`enemy`)
+        setUp(assets.image`enemy2`)
     } else if (level == 3) {
         tiles.setCurrentTilemap(tilemap`level1`)
-        setUp(assets.image`enemy`)
+        setUp(assets.image`enemy3`)
     } else {
         game.gameOver(true)
     }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.fire, 500)
-    info.changeScoreBy(-1)
+    info.changeLifeBy(-1)
 })
 let currentjumps = 0
 let playerSprite: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
-let level = 0
 let jumpNumber = 0
 let gravity = 0
 let jumpSpeed = 0
-let list: number[] = []
+let list: Sprite[] = []
+list = []
+let level = 0
 jumpSpeed = -75
 gravity = 100
 jumpNumber = 2
 level = 1
+info.setLife(3)
 startLevel()
 game.onUpdate(function () {
     if (playerSprite.isHittingTile(CollisionDirection.Bottom)) {
