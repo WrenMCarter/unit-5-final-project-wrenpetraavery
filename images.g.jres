@@ -59,20 +59,20 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "getcoin"
     },
-    "image16": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "myImage0"
-    },
-    "image6": {
-        "data": "hwQQABAAAAAAu7u7y7y7C7Du7u677M6760Tk7rvs7rtLRETuu+zuC0tERO677O4LS0RE7rvs7gtLRETuVVXuC0tERO7FXO4LS0RE7sVc7gtLRETuVVXuC0tERO677O4LS0RE7rvs7gtLRETuu+zuC+tE5O677O67sO7u7rvszrsAu7u7y7y7Cw==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "hi"
-    },
     "image1": {
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAPD/AAAAAPD//+8PAAAA//b27g7wDwBv9vdE/v//8Gb299Tu/v/wZm/3Tt7tD/Bmb/8b3u0P8PZ27//t/g/wf3bv1H1n//B3du/UbWf/AH92/u7///8A8G/3/gDwDwAA8P8PAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "player"
+    },
+    "image6": {
+        "data": "hwQQABAAAAAAu7u7+7+7C7Du7u677/6760Tk7rvv7rtLRETuu+/uC0tERO677+4LS0RE7rvv7gtLRETuG+XuC0tERO7xX+4LS0RE7vVf7gtLRETuW+XuC0tERO677+4LS0RE7rvv7gtLRETuu+/uC+tE5O677+67sO7u7rvv/rsAu7u7+7+7Cw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "chest"
+    },
+    "image15": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
