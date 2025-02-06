@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const key = SpriteKind.create()
+}
 function randomCollectible () {
     list = [
     sprites.create(assets.image`getlife`, SpriteKind.Food),
@@ -7,19 +10,20 @@ function randomCollectible () {
     ]
     return list._pickRandom()
 }
-scene.onOverlapTile(SpriteKind.Player, findKey(), function (sprite, location) {
-    level += 1
-    startLevel()
-})
 function setUp (enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
-        enemy = sprites.create(assets.image`enemy`, SpriteKind.Enemy)
+        enemy = sprites.create(enemyImage, SpriteKind.Enemy)
         tiles.placeOnTile(enemy, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
     for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
         collectible = randomCollectible()
         tiles.placeOnTile(collectible, value2)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
+    }
+    for (let value2 of tiles.getTilesByType(assets.tile`levelTile`)) {
+        endTile = sprites.create(findKey(), SpriteKind.key)
+        tiles.placeOnTile(endTile, value2)
         tiles.setTileAt(value2, assets.tile`transparency16`)
     }
     for (let value3 of tiles.getTilesByType(assets.tile`playerTile`)) {
@@ -51,6 +55,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     sprites.destroy(otherSprite, effects.confetti, 500)
     info.changeLifeBy(1)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
+    level += 1
+    startLevel()
+})
 function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
@@ -74,14 +82,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let currentjumps = 0
 let playerSprite: Sprite = null
+let endTile: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
+let level = 0
 let jumpNumber = 0
 let gravity = 0
 let jumpSpeed = 0
 let list: Sprite[] = []
 list = []
-let level = 0
 jumpSpeed = -75
 gravity = 100
 jumpNumber = 2
