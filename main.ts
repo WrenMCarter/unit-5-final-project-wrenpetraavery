@@ -1,6 +1,5 @@
 function setUp (enemyImage: Image) {
     tiles.setCurrentTilemap(tilemap`level1`)
-    tiles.placeOnRandomTile(playerSprite, assets.tile`playerTile`)
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
         enemy = sprites.create(assets.image`enemy`, SpriteKind.Enemy)
         tiles.placeOnTile(enemy, value)
@@ -27,10 +26,18 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         currentjumps += 1
     }
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite, effects.confetti, 500)
+    info.changeScoreBy(1)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite, effects.fire, 500)
+    info.changeScoreBy(-1)
+})
 let currentjumps = 0
+let playerSprite: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
-let playerSprite: Sprite = null
 let jumpNumber = 0
 let gravity = 0
 let jumpSpeed = 0
