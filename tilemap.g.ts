@@ -12,6 +12,28 @@ namespace myTiles {
     export const tile5 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile3 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile8 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile6 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile7 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile9 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile10 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile11 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile12 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile13 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile14 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile15 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile16 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -58,6 +80,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
+
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -71,7 +94,7 @@ namespace myTiles {
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . . 
 . . . . . . . . . . . . . 2 2 2 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.castle.tilePath5,myTiles.tile1,myTiles.tile2,myTiles.tile4,myTiles.tile3], TileScale.Sixteen);
+
         }
         return null;
     })
@@ -89,6 +112,28 @@ namespace myTiles {
             case "tile5":return tile5;
             case "levelTile":
             case "tile3":return tile3;
+            case "myTile3":
+            case "tile8":return tile8;
+            case "myTile":
+            case "tile6":return tile6;
+            case "myTile2":
+            case "tile7":return tile7;
+            case "myTile4":
+            case "tile9":return tile9;
+            case "myTile5":
+            case "tile10":return tile10;
+            case "myTile6":
+            case "tile11":return tile11;
+            case "myTile7":
+            case "tile12":return tile12;
+            case "myTile8":
+            case "tile13":return tile13;
+            case "myTile9":
+            case "tile14":return tile14;
+            case "myTile10":
+            case "tile15":return tile15;
+            case "myTile11":
+            case "tile16":return tile16;
         }
         return null;
     })
