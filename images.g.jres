@@ -69,11 +69,7 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "getcoin"
     },
-    "image6": {
-        "data": "hwQQABAAAAAAu7u7y7y7C7Du7u677M6760Tk7rvs7rtLRETuu+zuC0tERO677O4LS0RE7rvs7gtLRETuVVXuC0tERO7FXO4LS0RE7sVc7gtLRETuVVXuC0tERO677O4LS0RE7rvs7gtLRETuu+zuC+tE5O677O67sO7u7rvszrsAu7u7y7y7Cw==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "hi"
-    },
+
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

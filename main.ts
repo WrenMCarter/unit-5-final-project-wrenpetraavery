@@ -1,27 +1,3 @@
-let currentjumps = 0
-let playerSprite: Sprite = null
-let endTile: Sprite = null
-let collectible: Sprite = null
-let enemy: Sprite = null
-
-let level = 1
-let jumpNumber = 2
-let gravity = 600
-let jumpheight = 48
-
-const collectibles = [
-        sprites.create(assets.image`getlife`, SpriteKind.Food),
-        sprites.create(assets.image`getcollectible`, SpriteKind.Food),
-        sprites.create(assets.image`getcoin`, SpriteKind.Food),
-        sprites.create(assets.image`hi`, SpriteKind.Food)
-]
-
-namespace SpriteKind {
-    export const key = SpriteKind.create()
-}
-function randomCollectible () {
-    return collectibles._pickRandom()
-}
 function setUp (enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
         enemy = sprites.create(enemyImage, SpriteKind.Enemy)
@@ -68,10 +44,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     sprites.destroy(otherSprite, effects.confetti, 500)
     info.changeLifeBy(1)
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
-    level += 1
-    startLevel()
-})
 function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
@@ -93,7 +65,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     sprites.destroy(otherSprite, effects.fire, 500)
     info.changeLifeBy(-1)
 })
-
 
 info.setLife(3)
 startLevel()
