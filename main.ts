@@ -84,12 +84,18 @@ function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
 
+    let tilemaps = [
+        tilemap`level1`,
+        tilemap`level2`,
+        tilemap`level3`
+    ]
+
     if (level > 3) {
         return game.gameOver(true)
     }
 
     let image = enemies[level-1]
-    tiles.setCurrentTilemap(tilemap`level1`)
+    tiles.setCurrentTilemap(tilemaps[level-1])
     setUp(image)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
