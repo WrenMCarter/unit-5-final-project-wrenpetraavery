@@ -320,7 +320,7 @@ c d b c c c b d c . . . . . . .
 . . . . . . . . . . . . . . . . 
 `;
             case "image6":
-            case "hi":return img`
+            case "chest":return img`
 . . b b b b b b b b b b b b . . 
 . b e 4 4 4 4 4 4 4 4 4 4 e b . 
 b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 

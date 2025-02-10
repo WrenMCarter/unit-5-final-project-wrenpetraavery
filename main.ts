@@ -10,10 +10,12 @@ let gravity = 600
 let jumpheight = 48
 
 const collectibles = [
+
     sprites.create(assets.image`getlife`, SpriteKind.Food),
-    sprites.create(assets.image`getcollectible`, SpriteKind.Food),
+     sprites.create(assets.image`getcollectible`, SpriteKind.Food),
     sprites.create(assets.image`getcoin`, SpriteKind.Food),
-    sprites.create(assets.image`hi`, SpriteKind.Food),
+    sprites.create(assets.image`chest`, SpriteKind.Food)
+
 ]
 const enemies = [
     assets.image`enemy1`,
@@ -30,6 +32,8 @@ namespace SpriteKind {
     export const key = SpriteKind.create()
 }
 function randomCollectible () {
+    return collectibles._pickRandom()
+
     return collectibles._pickRandom()
 }
 function setUp (enemyImage: Image) {
@@ -102,3 +106,4 @@ game.onUpdate(function () {
         currentjumps = 0
     }
 })
+
