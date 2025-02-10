@@ -9,12 +9,6 @@ let jumpNumber = 2
 let gravity = 600
 let jumpheight = 48
 
-const collectibles = [
-    sprites.create(assets.image`getlife`, SpriteKind.Food),
-    sprites.create(assets.image`getcollectible`, SpriteKind.Food),
-    sprites.create(assets.image`getcoin`, SpriteKind.Food),
-    sprites.create(assets.image`hi`, SpriteKind.Food),
-]
 const enemies = [
     assets.image`enemy1`,
     assets.image`enemy2`,
@@ -29,8 +23,17 @@ const keys = [
 namespace SpriteKind {
     export const key = SpriteKind.create()
 }
-function randomCollectible () {
+function randomCollectible() {
+    let collectibles = [
+
+        assets.image`getlife`,
+        assets.image`getcollectible`,
+        assets.image`getcoin`,
+        assets.image`chest`
+
+    ]
     return collectibles._pickRandom()
+
 }
 function setUp (enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
@@ -39,14 +42,14 @@ function setUp (enemyImage: Image) {
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
     for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
-        collectible = randomCollectible()
+        collectible = sprites.create(randomCollectible(), SpriteKind.Food),
         tiles.placeOnTile(collectible, value2)
         tiles.setTileAt(value2, assets.tile`transparency16`)
     }
-    for (let value2 of tiles.getTilesByType(assets.tile`levelTile`)) {
+    for (let value4 of tiles.getTilesByType(assets.tile`levelTile`)) {
         endTile = sprites.create(findKey(), SpriteKind.key)
-        tiles.placeOnTile(endTile, value2)
-        tiles.setTileAt(value2, assets.tile`transparency16`)
+        tiles.placeOnTile(endTile, value4)
+        tiles.setTileAt(value4, assets.tile`transparency16`)
     }
     for (let value3 of tiles.getTilesByType(assets.tile`playerTile`)) {
         playerSprite = sprites.create(assets.image`player`, SpriteKind.Player)
@@ -80,13 +83,19 @@ function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
+    sprites.destroyAllSpritesOfKind(SpriteKind.key)
+    let tilemaps = [
+        tilemap`level1`,
+        tilemap`level2`,
+        tilemap`level3`
+    ]
 
     if (level > 3) {
         return game.gameOver(true)
     }
 
     let image = enemies[level-1]
-    tiles.setCurrentTilemap(tilemap`level1`)
+    tiles.setCurrentTilemap(tilemaps[level-1])
     setUp(image)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
