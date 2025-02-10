@@ -1,14 +1,26 @@
+let currentjumps = 0
+let playerSprite: Sprite = null
+let endTile: Sprite = null
+let collectible: Sprite = null
+let enemy: Sprite = null
+
+let level = 1
+let jumpNumber = 2
+let gravity = 600
+let jumpheight = 48
+
+const collectibles = [
+        sprites.create(assets.image`getlife`, SpriteKind.Food),
+        sprites.create(assets.image`getcollectible`, SpriteKind.Food),
+        sprites.create(assets.image`getcoin`, SpriteKind.Food),
+        sprites.create(assets.image`hi`, SpriteKind.Food)
+]
+
 namespace SpriteKind {
     export const key = SpriteKind.create()
 }
 function randomCollectible () {
-    list = [
-    sprites.create(assets.image`getlife`, SpriteKind.Food),
-    sprites.create(assets.image`getcollectible`, SpriteKind.Food),
-    sprites.create(assets.image`getcoin`, SpriteKind.Food),
-    sprites.create(assets.image`hi`, SpriteKind.Food)
-    ]
-    return list._pickRandom()
+    return collectibles._pickRandom()
 }
 function setUp (enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
@@ -36,9 +48,10 @@ function setUp (enemyImage: Image) {
         scene.cameraFollowSprite(playerSprite)
     }
 }
+
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (currentjumps < jumpNumber) {
-        playerSprite.vy = jumpSpeed
+        playerSprite.vy = -Math.sqrt(2 * (gravity * jumpheight))
         currentjumps += 1
     }
 })
@@ -80,21 +93,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     sprites.destroy(otherSprite, effects.fire, 500)
     info.changeLifeBy(-1)
 })
-let currentjumps = 0
-let playerSprite: Sprite = null
-let endTile: Sprite = null
-let collectible: Sprite = null
-let enemy: Sprite = null
-let level = 0
-let jumpNumber = 0
-let gravity = 0
-let jumpSpeed = 0
-let list: Sprite[] = []
-list = []
-jumpSpeed = -75
-gravity = 100
-jumpNumber = 2
-level = 1
+
+
 info.setLife(3)
 startLevel()
 game.onUpdate(function () {
