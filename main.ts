@@ -10,10 +10,20 @@ let gravity = 600
 let jumpheight = 48
 
 const collectibles = [
-        sprites.create(assets.image`getlife`, SpriteKind.Food),
-        sprites.create(assets.image`getcollectible`, SpriteKind.Food),
-        sprites.create(assets.image`getcoin`, SpriteKind.Food),
-        sprites.create(assets.image`hi`, SpriteKind.Food)
+    sprites.create(assets.image`getlife`, SpriteKind.Food),
+    sprites.create(assets.image`getcollectible`, SpriteKind.Food),
+    sprites.create(assets.image`getcoin`, SpriteKind.Food),
+    sprites.create(assets.image`hi`, SpriteKind.Food),
+]
+const enemies = [
+    assets.image`enemy1`,
+    assets.image`enemy2`,
+    assets.image`enemy3`,
+]
+const keys = [
+    assets.image`key1`,
+    assets.image`key2`,
+    assets.image`key3`,
 ]
 
 namespace SpriteKind {
@@ -56,13 +66,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function findKey () {
-    if (level == 1) {
-        return assets.image`key1`
-    } else if (level == 2) {
-        return assets.image`key2`
-    } else {
-        return assets.image`key3`
-    }
+    return keys[level-1]
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.confetti, 500)
@@ -76,18 +80,14 @@ function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
-    if (level == 1) {
-        tiles.setCurrentTilemap(tilemap`level1`)
-        setUp(assets.image`enemy1`)
-    } else if (level == 2) {
-        tiles.setCurrentTilemap(tilemap`level1`)
-        setUp(assets.image`enemy2`)
-    } else if (level == 3) {
-        tiles.setCurrentTilemap(tilemap`level1`)
-        setUp(assets.image`enemy3`)
-    } else {
-        game.gameOver(true)
+
+    if (level > 3) {
+        return game.gameOver(true)
     }
+
+    let image = enemies[level-1]
+    tiles.setCurrentTilemap(tilemap`level1`)
+    setUp(image)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.fire, 500)
