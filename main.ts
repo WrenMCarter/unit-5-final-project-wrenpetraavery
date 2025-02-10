@@ -83,7 +83,7 @@ function startLevel () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
-
+    sprites.destroyAllSpritesOfKind(SpriteKind.key)
     let tilemaps = [
         tilemap`level1`,
         tilemap`level2`,
@@ -111,4 +111,3 @@ game.onUpdate(function () {
         currentjumps = 0
     }
 })
-
