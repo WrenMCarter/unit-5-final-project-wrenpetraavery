@@ -9,11 +9,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "coin0"
     },
-    "image5": {
-        "data": "hwQQABAAAACIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "foodTile"
-    },
     "image4": {
         "data": "hwQQABAAAAAA//8PwPwPAPDP/8+8+/8A//zPG7IRsg/PzLy7uy8i+88AzLu7LyL7AADAvLsRIvsAALwbsvyy+wAAzLu7u7v7AADAzLu7u/sAAP+/vLu7/AD/vLvMu8sP8LzLzMz//wDAy7vMDMAMAL/LvMsAAAwAv8zMDAAAAADPAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -73,6 +68,11 @@
         "data": "hwQQABAAAAAAu7u7y7y7C7Du7u677M6760Tk7rvs7rtLRETuu+zuC0tERO677O4LS0RE7rvs7gtLRETuVVXuC0tERO7FXO4LS0RE7sVc7gtLRETuVVXuC0tERO677O4LS0RE7rvs7gtLRETuu+zuC+tE5O677O67sO7u7rvszrsAu7u7y7y7Cw==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "chest"
+    },
+    "image5": {
+        "data": "hwQQABAAAACIiIiIiIiIiIiIiIiIiIiIiJmJiIiIiIiYiImZmZmZiZiImYiIiIiJiZiYiIiIiImJmJiIiIiIiYmYmJiIiIiJiJiYmIiImIiImJiYiIiYiIiYiJmIiJiIiJiImYiIiYiIiJmZiYiJiIiImZmJmIiIiIiImZiZiIiIiIiZiJmIiA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "foodTile"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",
