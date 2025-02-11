@@ -113,47 +113,43 @@ scene.setBackgroundImage(assets.image`cloudyBackground`)
 info.setLife(3)
 startLevel()
 
-let SwordPos = 10
+let SwordPos = 20
 game.onUpdate(function () {
     if (!playerSprite) {return}
     if (playerSprite.isHittingTile(CollisionDirection.Bottom)) {
         currentjumps = 0
     }
     if (playerSprite.vx != 0) {
-        SwordPos = Math.sign(playerSprite.vx) * 10
+        SwordPos = Math.sign(playerSprite.vx) * 20
     }
 })
 
-sprites.onOverlap(SpriteKind.PlayerSword, SpriteKind.Enemy, function (sprite: Sprite, otherSprite: Sprite) {
-    sprites.destroy(otherSprite, effects.fire, 500)
-})
+function getOverlappingByKind(sprite: Sprite, kind: number) {
+    // EVIL CODE
+    const map = (game.currentScene().physicsEngine as any).map as sprites.SpriteMap;
+
+    return map.neighbors(sprite).filter(s => s.kind() === kind).filter(s => s.overlapsWith(sprite));
+}
 
 let CanAttack = true
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!CanAttack) { return }
     CanAttack = false; setTimeout(() => { CanAttack = true }, attackspeed * 1000)
     let sword = sprites.create(img`
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-`, SpriteKind.PlayerSword)
+        3 3
+    `, SpriteKind.PlayerSword)
+
+    sword.changeScale(16, ScaleAnchor.Middle)
 
     sword.x = playerSprite.x + SwordPos
     sword.y = playerSprite.y
 
-    setTimeout(() => { sword.destroy() }, 10)
+    const hitEnemies = getOverlappingByKind(sword, SpriteKind.Enemy)
+
+    for (const sprite of hitEnemies) {
+        sprites.destroy(sprite, effects.fire, 500) 
+    }
+
+    sword.destroy()
 })
 
