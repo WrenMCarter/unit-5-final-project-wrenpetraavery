@@ -4,6 +4,7 @@ let endTile: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
 
+let attackspeed = 0.5
 let level = 1
 let jumpNumber = 2
 let gravity = 600
@@ -21,7 +22,8 @@ const keys = [
 ]
 
 namespace SpriteKind {
-    export const key = SpriteKind.create()
+    export const key = SpriteKind.create();
+    export const PlayerSword = SpriteKind.create();
 }
 function randomCollectible() {
     let collectibles = [
@@ -35,15 +37,15 @@ function randomCollectible() {
     return collectibles._pickRandom()
 
 }
-function setUp (enemyImage: Image) {
+function setUp(enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
         enemy = sprites.create(enemyImage, SpriteKind.Enemy)
         tiles.placeOnTile(enemy, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
-    for (let value2 of tiles.getTilesByType(assets.tile`foodTile`)) {
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
         collectible = sprites.create(randomCollectible(), SpriteKind.Food),
-        tiles.placeOnTile(collectible, value2)
+            tiles.placeOnTile(collectible, value2)
         tiles.setTileAt(value2, assets.tile`transparency16`)
     }
     for (let value4 of tiles.getTilesByType(assets.tile`levelTile`)) {
@@ -68,8 +70,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         currentjumps += 1
     }
 })
-function findKey () {
-    return keys[level-1]
+function findKey() {
+    return keys[level - 1]
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.confetti, 500)
@@ -79,7 +81,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSpri
     level += 1
     startLevel()
 })
-function startLevel () {
+function startLevel() {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
@@ -94,8 +96,8 @@ function startLevel () {
         return game.gameOver(true)
     }
 
-    let image = enemies[level-1]
-    tiles.setCurrentTilemap(tilemaps[level-1])
+    let image = enemies[level - 1]
+    tiles.setCurrentTilemap(tilemaps[level - 1])
     setUp(image)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
@@ -106,9 +108,46 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 
 info.setLife(3)
 startLevel()
+
+let SwordPos = 10
 game.onUpdate(function () {
     if (playerSprite.isHittingTile(CollisionDirection.Bottom)) {
         currentjumps = 0
     }
+    if (playerSprite.vx != 0) {
+        SwordPos = Math.sign(playerSprite.vx) * 10
+    }
 })
 
+sprites.onOverlap(SpriteKind.PlayerSword, SpriteKind.Enemy, function (sprite: Sprite, otherSprite: Sprite) {
+    sprites.destroy(otherSprite, effects.fire, 500)
+})
+
+let CanAttack = true
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (!CanAttack) { return }
+    CanAttack = false; setTimeout(() => { CanAttack = true }, attackspeed * 1000)
+    let sword = sprites.create(img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+`, SpriteKind.PlayerSword)
+
+    sword.x = playerSprite.x + SwordPos
+    sword.y = playerSprite.y
+
+    setTimeout(() => { sword.destroy() }, 10)
+})
