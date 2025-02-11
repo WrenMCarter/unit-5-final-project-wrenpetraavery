@@ -44,6 +44,16 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "getcollectible"
     },
+    "image10": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAA4O7u7gAAAABeVVVEDgAA4FVE5E7kAABeRVVV5EQOAF5UVVVFTg4AXlRVVVVODgBeVFVVVU4OAF4UVVVVTg4AHhRRVVVODgAeRRFV5UQOAOBRRERO5AAAAB5RVVUOAAAA4O7u7gAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "getcoin"
+    },
+    "image11": {
+        "data": "hwQQABAAAAAAu7u7y7y7C7Du7u677M6760Tk7rvs7rtLRETuu+zuC0tERO677O4LS0RE7rvs7gtLRETuVVXuC0tERO7FXO4LS0RE7sVc7gtLRETuVVXuC0tERO677O4LS0RE7rvs7gtLRETuu+zuC+tE5O677O67sO7u7rvszrsAu7u7y7y7Cw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "chest"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

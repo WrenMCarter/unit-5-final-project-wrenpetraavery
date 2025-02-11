@@ -216,6 +216,44 @@ c d b c c c b d c . . . . . . .
 . . e e e e . . . . e e e e . . 
 . . . . . . . . . . . . . . . . 
 `;
+            case "image10":
+            case "getcoin":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . e e e e e e e . . . . . 
+. . . e 5 5 5 5 5 1 1 e . . . . 
+. . e 5 5 4 4 4 4 4 5 1 e . . . 
+. e 5 5 4 5 5 5 1 1 4 5 1 e . . 
+. e 5 4 5 5 5 5 5 1 1 4 1 e . . 
+. e 5 4 5 5 5 5 5 5 1 4 5 e . . 
+. e 5 4 5 5 5 5 5 5 5 4 5 e . . 
+. e 5 e 5 5 5 5 5 5 5 4 5 e . . 
+. e 4 e 4 5 5 5 5 5 5 e 5 e . . 
+. e 4 4 e 4 5 5 5 5 e 4 5 e . . 
+. . e 4 4 e e e e e 4 4 e . . . 
+. . . e 4 4 4 4 4 4 4 e . . . . 
+. . . . e e e e e e e . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "image11":
+            case "chest":return img`
+. . b b b b b b b b b b b b . . 
+. b e 4 4 4 4 4 4 4 4 4 4 e b . 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+b e e e e e e e e e e e e e e b 
+b e e e e e e e e e e e e e e b 
+b b b b b b 5 5 5 5 b b b b b b 
+c b b b b b 5 c c 5 b b b b b c 
+c c c c c c 5 c c 5 c c c c c c 
+b e e e e e 5 5 5 5 e e e e e b 
+b e e e e e e e e e e e e e e b 
+b c e e e e e e e e e e e e c b 
+b b b b b b b b b b b b b b b b 
+. b b . . . . . . . . . . b b . 
+`;
         }
         return null;
     })
