@@ -124,7 +124,7 @@ startLevel()
 
 let SwordPos = 20
 game.onUpdate(function () {
-    // conditional statements and boolean operators
+    // conditional statements
     if (!playerSprite) {return}
     if (playerSprite.isHittingTile(CollisionDirection.Bottom)) {
         currentjumps = 0
