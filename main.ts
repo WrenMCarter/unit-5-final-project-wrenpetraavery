@@ -10,6 +10,8 @@ let jumpNumber = 2
 let gravity = 600
 let jumpheight = 48
 
+music.play(music.createSong(assets.song`mySong`), music.PlaybackMode.LoopingInBackground)
+
 const enemies = [
     assets.image`enemy1`,
     assets.image`enemy2`,
@@ -71,7 +73,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (currentjumps < jumpNumber) {
         playerSprite.vy = -Math.sqrt(2 * (gravity * jumpheight))
         currentjumps += 1
-    }
+    } 
 })
 function findKey() {
     return keys[level - 1]
@@ -79,10 +81,12 @@ function findKey() {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.confetti, 500)
     info.changeLifeBy(1)
+    music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
     level += 1
     startLevel()
+    music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.UntilDone)
 })
 function startLevel() {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
@@ -106,6 +110,7 @@ function startLevel() {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.fire, 500)
     info.changeLifeBy(-1)
+    music.play(music.melodyPlayable(music.powerDown), music.PlaybackMode.UntilDone)
 })
 
 scene.setBackgroundImage(assets.image`cloudyBackground`)
