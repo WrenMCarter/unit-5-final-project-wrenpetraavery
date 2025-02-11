@@ -10,8 +10,6 @@ let jumpNumber = 2
 let gravity = 600
 let jumpheight = 48
 
-music.play(music.createSong(assets.song`mySong`), music.PlaybackMode.LoopingInBackground)
-
 const enemies = [
     assets.image`enemy1`,
     assets.image`enemy2`,
