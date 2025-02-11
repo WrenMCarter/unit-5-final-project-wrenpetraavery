@@ -112,6 +112,3 @@ game.onUpdate(function () {
     }
 })
 
-function hello(){
-    game.splash("hello")
-}
