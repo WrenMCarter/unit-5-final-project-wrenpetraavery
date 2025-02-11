@@ -111,3 +111,7 @@ game.onUpdate(function () {
         currentjumps = 0
     }
 })
+
+function hello(){
+    game.splash("hello")
+}
