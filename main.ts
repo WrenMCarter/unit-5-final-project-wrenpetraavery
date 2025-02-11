@@ -105,6 +105,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     info.changeLifeBy(-1)
 })
 
+scene.setBackgroundImage(assets.image`cloudyBackground`)
 
 info.setLife(3)
 startLevel()
