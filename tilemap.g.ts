@@ -75,7 +75,11 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 `, [myTiles.transparency16,sprites.castle.tileGrass1,myTiles.tile2,myTiles.tile4,myTiles.tile3,myTiles.tile1], TileScale.Sixteen);
+            
 
+        }
+        return null;
+    })
 
     helpers._registerFactory("tile", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -117,5 +121,4 @@ namespace myTiles {
     })
 
 }
-    })
 // Auto-generated code. Do not edit.
