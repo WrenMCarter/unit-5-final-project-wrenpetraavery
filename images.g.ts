@@ -3,53 +3,26 @@ namespace myImages {
 
     helpers._registerFactory("image", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "image2":
-            case "enemy":return img`
-........................
-........................
-........................
-........................
-..........ffff..........
-........ff1111ff........
-.......fb111111bf.......
-.......f11111111f.......
-......fd11111111df......
-......fd11111111df......
-......fddd1111dddf......
-......fbdbfddfbdbf......
-......fcdcf11fcdcf......
-.......fb111111bf.......
-......fffcdb1bdffff.....
-....fc111cbfbfc111cf....
-....f1b1b1ffff1b1b1f....
-....fbfbffffffbfbfbf....
-.........ffffff.........
-...........fff..........
-........................
-........................
-........................
-........................
-`;
-            case "image3":
-            case "coin0":return img`
+            case "image1":
+            case "player":return img`
 . . . . . . . . . . . . . . . . 
-. . . . 5 5 5 5 5 5 5 5 5 . . . 
-. . . 5 . . . . . . . . 5 5 . . 
-. . 5 . . . . . . . . . . 5 . . 
-. 5 . . . . . . . . . . . . 5 . 
-. 5 . . . . . . 5 5 . . . . 5 . 
-5 . . . . . . 5 5 . . . . . 5 . 
-5 . . . . . . 5 . . . . . . 5 . 
-5 . . . . . . 5 . . . . . . 5 . 
-5 . . . . . . 5 . . . . . . 5 . 
-5 . . . . . . 5 . . . . 5 5 5 . 
-5 . . . . . . 5 5 5 5 5 . . . . 
-5 5 . . . . . . . . . . . . . . 
-. 5 5 5 5 . . . . . . . . . . . 
-. . . . . 5 5 5 5 . . . . . . . 
-. . . . . . . . 5 5 5 5 . . . . 
+. . . . . f f f f f f . . . . . 
+. . . f f 6 6 6 6 f 7 f . . . . 
+. . f f 6 6 6 6 f 7 7 7 f . . . 
+. . f 6 6 6 f f 6 6 6 6 f . . . 
+. . f f f f 6 6 7 7 7 7 6 f . . 
+. . f 6 7 7 7 f f f f e 7 f . . 
+. f f f f f f f e e e f f f . . 
+. f f e 4 4 e b f 4 4 e e f . . 
+. f e e 4 d 4 1 f d d e f . . . 
+. . f e e e e e d d d f . . . . 
+. . . . f e d d e 7 6 f . . . . 
+. . . . f e d d e 7 7 f . . . . 
+. . . f f f e e f 6 6 f f . . . 
+. . . f f f f f f f f f f . . . 
+. . . . f f . . . f f f . . . . 
 `;
-            case "image4":
+            case "image2":
             case "enemy1":return img`
 . . f f f . . . . . . . . f f f 
 . f f c c . . . . . . f c b b c 
@@ -68,7 +41,7 @@ f f 2 2 2 2 2 b b b b f c c . .
 . . f b b b b b b c f . . . . . 
 . . . f f f f f f f . . . . . . 
 `;
-            case "image7":
+            case "image3":
             case "enemy2":return img`
 ........................
 ........................
@@ -95,7 +68,7 @@ f f 2 2 2 2 2 b b b b f c c . .
 ........................
 ........................
 `;
-            case "image8":
+            case "image4":
             case "enemy3":return img`
 ..................................................
 ..................................................
@@ -148,7 +121,7 @@ f f 2 2 2 2 2 b b b b f c c . .
 ..................................................
 ..................................................
 `;
-            case "image9":
+            case "image5":
             case "key1":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . e . . . 
@@ -167,7 +140,7 @@ e 5 4 e e e 4 5 e . . . . . . .
 . e 4 4 4 4 4 e . . . . . . . . 
 . . e e e e e . . . . . . . . . 
 `;
-            case "image10":
+            case "image6":
             case "key2":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . 8 . . . 
@@ -186,7 +159,7 @@ e 5 4 e e e 4 5 e . . . . . . .
 . 8 6 6 6 6 6 8 . . . . . . . . 
 . . 8 8 8 8 8 . . . . . . . . . 
 `;
-            case "image11":
+            case "image7":
             case "key3":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . c . . . 
@@ -205,64 +178,26 @@ c d b c c c b d c . . . . . . .
 . c b b b b b c . . . . . . . . 
 . . c c c c c . . . . . . . . . 
 `;
-            case "image16":
-            case "myImage0":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "image1":
-            case "player":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . f f f f f f . . . . . 
-. . . f f 6 6 6 6 f 7 f . . . . 
-. . f f 6 6 6 6 f 7 7 7 f . . . 
-. . f 6 6 6 f f 6 6 6 6 f . . . 
-. . f f f f 6 6 7 7 7 7 6 f . . 
-. . f 6 7 7 7 f f f f e 7 f . . 
-. f f f f f f f e e e f f f . . 
-. f f e 4 4 e b f 4 4 e e f . . 
-. f e e 4 d 4 1 f d d e f . . . 
-. . f e e e e e d d d f . . . . 
-. . . . f e d d e 7 6 f . . . . 
-. . . . f e d d e 7 7 f . . . . 
-. . . f f f e e f 6 6 f f . . . 
-. . . f f f f f f f f f f . . . 
-. . . . f f . . . f f f . . . . 
-`;
-            case "image13":
+            case "image9":
             case "getlife":return img`
 . . . . . . . . . . . . . . . . 
 . . c c c c c c . c c c c c c . 
-. c c 3 3 3 b c c c b 3 3 3 c c 
+. c c 3 3 3 3 c c c 3 3 3 3 c c 
 . c 3 3 3 3 3 b c b 3 1 3 3 3 c 
 . c 3 3 3 3 3 3 b 3 1 1 1 3 3 c 
 . c 3 3 3 3 3 3 3 1 1 1 1 1 3 c 
 . c 3 3 3 3 3 3 3 3 1 1 1 3 3 c 
 . c 3 3 3 3 3 3 3 3 3 1 3 3 3 c 
-. c c 3 3 3 3 3 3 3 3 3 3 3 c c 
-. . c c b 3 3 3 3 3 3 3 b c c . 
-. . . c c b b 3 3 3 b b c c . . 
-. . . . c c b b 3 b b c c . . . 
+. c c b 3 3 3 3 3 3 3 3 3 b c c 
+. . c c b b 3 3 3 3 3 b b c c . 
+. . . c c b b b 3 b b b c c . . 
+. . . . c c b b b b b c c . . . 
 . . . . . c c b b b c c . . . . 
 . . . . . . c c b c c . . . . . 
 . . . . . . . c c c . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "image12":
+            case "image8":
             case "getcollectible":return img`
 . . . . . . . 4 4 . . . . . . . 
 . . . . . . 4 5 5 4 . . . . . . 
@@ -281,45 +216,6 @@ c d b c c c b d c . . . . . . .
 . . e e e e . . . . e e e e . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "image14":
-            case "getcoin":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . e e e e e e e . . . . . 
-. . . e 5 5 5 5 5 1 1 e . . . . 
-. . e 5 5 4 4 4 4 4 5 1 e . . . 
-. e 5 5 4 5 5 5 1 1 4 5 1 e . . 
-. e 5 4 5 5 5 5 5 1 1 4 1 e . . 
-. e 5 4 5 5 5 5 5 5 1 4 5 e . . 
-. e 5 4 5 5 5 5 5 5 5 4 5 e . . 
-. e 5 e 5 5 5 5 5 5 5 4 5 e . . 
-. e 4 e 4 5 5 5 5 5 5 e 5 e . . 
-. e 4 4 e 4 5 5 5 5 e 4 5 e . . 
-. . e 4 4 e e e e e 4 4 e . . . 
-. . . e 4 4 4 4 4 4 4 e . . . . 
-. . . . e e e e e e e . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "image6":
-            case "chest":return img`
-. . b b b b b b b b b b b b . . 
-. b e 4 4 4 4 4 4 4 4 4 4 e b . 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-b e e e e e e e e e e e e e e b 
-b e e e e e e e e e e e e e e b 
-b b b b b b 5 5 5 5 b b b b b b 
-c b b b b b 5 c c 5 b b b b b c 
-c c c c c c 5 c c 5 c c c c c c 
-b e e e e e 5 5 5 5 e e e e e b 
-b e e e e e e e e e e e e e e b 
-b c e e e e e e e e e e e e c b 
-b b b b b b b b b b b b b b b b 
-. b b . . . . . . . . . . b b . 
-`;
-
         }
         return null;
     })
