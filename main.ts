@@ -27,6 +27,8 @@ namespace SpriteKind {
     export const key = SpriteKind.create();
     export const PlayerSword = SpriteKind.create();
 }
+
+
 function randomCollectible() {
     let collectibles = [
 
@@ -62,6 +64,7 @@ function setUp(enemyImage: Image) {
         playerSprite = sprites.create(assets.image`player`, SpriteKind.Player)
         tiles.placeOnTile(playerSprite, value3)
         tiles.setTileAt(value3, assets.tile`transparency16`)
+        // player input and program output
         controller.moveSprite(playerSprite, 100, 0)
         playerSprite.ay = gravity
         playerSprite.setStayInScreen(true)
@@ -93,6 +96,7 @@ function startLevel() {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
     sprites.destroyAllSpritesOfKind(SpriteKind.key)
+    // tilemaps and arrays
     let tilemaps = [
         tilemap`level1`,
         tilemap`level2`,
@@ -120,6 +124,7 @@ startLevel()
 
 let SwordPos = 20
 game.onUpdate(function () {
+    // conditional statements and boolean operators
     if (!playerSprite) {return}
     if (playerSprite.isHittingTile(CollisionDirection.Bottom)) {
         currentjumps = 0
@@ -129,6 +134,7 @@ game.onUpdate(function () {
     }
 })
 
+// function with return values and parameters
 function getOverlappingByKind(sprite: Sprite, kind: number) {
     // EVIL CODE
     const map = (game.currentScene().physicsEngine as any).map as sprites.SpriteMap;
