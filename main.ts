@@ -41,7 +41,7 @@ function setUp (enemyImage: Image) {
         tiles.placeOnTile(enemy, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
     }
-    for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
+    for (let value2 of tiles.getTilesByType(assets.tile`foodTile`)) {
         collectible = sprites.create(randomCollectible(), SpriteKind.Food),
         tiles.placeOnTile(collectible, value2)
         tiles.setTileAt(value2, assets.tile`transparency16`)
