@@ -151,3 +151,4 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
     setTimeout(() => { sword.destroy() }, 10)
 })
+
