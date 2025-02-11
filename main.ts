@@ -1,3 +1,4 @@
+// set variables
 let currentjumps = 0
 let playerSprite: Sprite = null
 let endTile: Sprite = null
@@ -10,8 +11,10 @@ let jumpNumber = 2
 let gravity = 600
 let jumpheight = 48
 
+// set up music
 music.play(music.createSong(assets.song`mySong`), music.PlaybackMode.LoopingInBackground)
 
+// arrays with enemy and key images
 const enemies = [
     assets.image`enemy1`,
     assets.image`enemy2`,
@@ -23,12 +26,13 @@ const keys = [
     assets.image`key3`,
 ]
 
+// create new spritekinds
 namespace SpriteKind {
     export const key = SpriteKind.create();
     export const PlayerSword = SpriteKind.create();
 }
 
-
+// get a random collectible from an array 
 function randomCollectible() {
     let collectibles = [
 
@@ -41,6 +45,8 @@ function randomCollectible() {
     return collectibles._pickRandom()
 
 }
+
+// make placeholders and set up each sprite with its properties
 function setUp(enemyImage: Image) {
     for (let value of tiles.getTilesByType(assets.tile`enemyTile`)) {
         enemy = sprites.create(enemyImage, SpriteKind.Enemy)
@@ -72,25 +78,30 @@ function setUp(enemyImage: Image) {
     }
 }
 
+// control jumping
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (currentjumps < jumpNumber) {
         playerSprite.vy = -Math.sqrt(2 * (gravity * jumpheight))
         currentjumps += 1
     } 
 })
+// find the correct key for the level
 function findKey() {
     return keys[level - 1]
 }
+// get life when overlap food
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.confetti, 500)
     info.changeLifeBy(1)
     music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.UntilDone)
 })
+// change levels when reach end tile w/ key
 sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
     level += 1
     startLevel()
     music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.UntilDone)
 })
+// start level with correct sprites and tilemap, win when game over
 function startLevel() {
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
@@ -111,17 +122,20 @@ function startLevel() {
     tiles.setCurrentTilemap(tilemaps[level - 1])
     setUp(image)
 }
+// lose life when run into enemies
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.fire, 500)
     info.changeLifeBy(-1)
     music.play(music.melodyPlayable(music.powerDown), music.PlaybackMode.UntilDone)
 })
 
+//set up game
 scene.setBackgroundImage(assets.image`cloudyBackground`)
 
 info.setLife(3)
 startLevel()
 
+// create a sword to hit enemies with, and control jumping
 let SwordPos = 20
 game.onUpdate(function () {
     // conditional statements
@@ -142,6 +156,7 @@ function getOverlappingByKind(sprite: Sprite, kind: number) {
     return map.neighbors(sprite).filter(s => s.kind() === kind).filter(s => s.overlapsWith(sprite));
 }
 
+// allow sword attack when press b button
 let CanAttack = true
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!CanAttack) { return }
