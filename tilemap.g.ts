@@ -117,5 +117,5 @@ namespace myTiles {
     })
 
 }
-    }
+    })
 // Auto-generated code. Do not edit.
