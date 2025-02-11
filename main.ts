@@ -42,6 +42,9 @@ function setUp(enemyImage: Image) {
         enemy = sprites.create(enemyImage, SpriteKind.Enemy)
         tiles.placeOnTile(enemy, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
+        enemy.vx = 50
+        enemy.setBounceOnWall(true)
+            
     }
     for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
         collectible = sprites.create(randomCollectible(), SpriteKind.Food),
