@@ -5,11 +5,12 @@ let endTile: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
 
-let attackspeed = 0.5
 let level = 1
 let jumpNumber = 2
 let gravity = 600
 let jumpheight = 48
+let attacklength = 350
+let attackcooldown = 100
 
 // set up music
 music.play(music.createSong(assets.song`mySong`), music.PlaybackMode.LoopingInBackground)
@@ -135,47 +136,128 @@ scene.setBackgroundImage(assets.image`cloudyBackground`)
 info.setLife(3)
 startLevel()
 
-// create a sword to hit enemies with, and control jumping
-let SwordPos = 20
-game.onUpdate(function () {
-    // conditional statements
-    if (!playerSprite) {return}
-    if (playerSprite.isHittingTile(CollisionDirection.Bottom)) {
-        currentjumps = 0
-    }
-    if (playerSprite.vx != 0) {
-        SwordPos = Math.sign(playerSprite.vx) * 20
-    }
-})
-
 // function with return values and parameters
 function getOverlappingByKind(sprite: Sprite, kind: number) {
-    // EVIL CODE
+    // use protected engine method to efficiently get overlapping sprites
     const map = (game.currentScene().physicsEngine as any).map as sprites.SpriteMap;
-
     return map.neighbors(sprite).filter(s => s.kind() === kind).filter(s => s.overlapsWith(sprite));
 }
 
 // allow sword attack when press b button
+let Attacking = false
 let CanAttack = true
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!CanAttack) { return }
-    CanAttack = false; setTimeout(() => { CanAttack = true }, attackspeed * 1000)
+    if (Attacking || !CanAttack) { return }
+
+    Attacking = true;
+    CanAttack = false;
+    setTimeout(() => {
+        Attacking = false
+        pause(attackcooldown) // we can just pause here bc this is a coroutine
+        CanAttack = true
+    }, attacklength)
+    
     let sword = sprites.create(img`
+        3 3
         3 3
     `, SpriteKind.PlayerSword)
 
     sword.changeScale(16, ScaleAnchor.Middle)
 
-    sword.x = playerSprite.x + SwordPos
+    sword.x = playerSprite.x + FacingDirection * 20
     sword.y = playerSprite.y
 
     const hitEnemies = getOverlappingByKind(sword, SpriteKind.Enemy)
-
+    sword.destroy()
+    pause(100)
     for (const sprite of hitEnemies) {
-        sprites.destroy(sprite, effects.fire, 500) 
+        sprites.destroy(sprite, effects.fire, 100) 
     }
 
-    sword.destroy()
+    
 })
 
+
+const AnimationMap = {
+    "SetType": "position",
+
+    "grounded": {
+        "left": {
+            "moving": assets.animation`playerWalkLeft`,
+            "idle": assets.animation`playerIdleLeft`,
+        },
+        "right": {
+            "moving": assets.animation`playerWalkRight`,
+            "idle": assets.animation`playerIdleRight`,
+        }
+    },
+    "attacking": {
+        "left": assets.animation`playerAttackLeft`,
+        "right": assets.animation`playerAttackRight`,
+    },
+    "falling": { // TODO: make falling animations
+        "left": assets.animation`playerWalkLeft`,
+        "right": assets.animation`playerWalkRight`,
+    },
+}
+
+let CurrentLoopingAnimation: Image[] = assets.animation`playerIdleRight`
+let CurrentLoopSpeed = 100
+let CurrentAnimation: Image[] = []
+function playAnimation(anim: Image[],speed: number,loop: boolean) {
+    if (anim == CurrentLoopingAnimation || anim == CurrentAnimation) {return}
+    
+    if (loop) {
+        CurrentLoopingAnimation = anim
+        CurrentLoopSpeed = speed
+    }
+
+    //if (CurrentAnimation.length != 0) {return}
+    
+    animation.runImageAnimation(playerSprite, anim, speed, loop)
+    if (loop) {return}
+    CurrentAnimation = anim
+
+    // setTimeout is used because pause() will literally yield the game update since i can't make this function async
+    
+    setTimeout(() => {
+        CurrentAnimation = []
+        animation.runImageAnimation(playerSprite, CurrentLoopingAnimation, CurrentLoopSpeed, true)
+    }, speed * anim.length)
+}
+
+let FacingDirection = 1;
+function updateAnimation() {
+    if (VelocityDirection != 0) {FacingDirection = VelocityDirection}
+    
+    let grounded = playerSprite.isHittingTile(CollisionDirection.Bottom)
+    
+    let anims:any = AnimationMap[Attacking ? "attacking" : (grounded ? "grounded" : "falling")] // ternary chain go
+    let anim: any = anims[FacingDirection == 1 ? "right" : "left"]
+
+    if (!Array.isArray(anim)) {
+        anim = anim[VelocityDirection == 0 ? "idle" : "moving"]
+    }
+    playAnimation(anim, 100, !Attacking)
+}
+
+let VelocityDirection = 0
+let Grounded = true
+let LastAttacking = false
+game.onUpdate(function () {
+    // conditional statements
+    if (!playerSprite) { return }
+
+    let grounded = playerSprite.isHittingTile(CollisionDirection.Bottom)
+    if (grounded) {
+        currentjumps = 0
+    }
+
+    let vd = Math.sign(playerSprite.vx)
+    if (vd == VelocityDirection && grounded == Grounded && LastAttacking == Attacking) {return}
+    VelocityDirection = vd
+    Grounded = grounded
+    LastAttacking = Attacking
+
+    updateAnimation()
+})
