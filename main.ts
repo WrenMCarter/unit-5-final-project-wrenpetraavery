@@ -5,6 +5,7 @@ let endTile: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
 
+// level properties
 let level = 1
 let jumpNumber = 2
 let gravity = 600
@@ -82,7 +83,7 @@ function setUp(enemyImage: Image) {
 // control jumping
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (currentjumps < jumpNumber) {
-        playerSprite.vy = -Math.sqrt(2 * (gravity * jumpheight))
+        playerSprite.vy = -Math.sqrt(2 * (gravity * jumpheight)) // calculate force to reach specified height in pixels
         currentjumps += 1
     }
 })
@@ -90,6 +91,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 function findKey() {
     return keys[level - 1]
 }
+
 // get life when overlap food
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.confetti, 500)
@@ -102,12 +104,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSpri
     startLevel()
     music.play(music.melodyPlayable(music.buzzer), music.PlaybackMode.UntilDone)
 })
+
 // start level with correct sprites and tilemap, win when game over
 function startLevel() {
+    // clean up all sprites
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
     sprites.destroyAllSpritesOfKind(SpriteKind.key)
+
     // tilemaps and arrays
     let tilemaps = [
         tilemap`level1`,
@@ -115,6 +120,7 @@ function startLevel() {
         tilemap`level3`
     ]
 
+    // game over if past last level
     if (level > 3) {
         return game.gameOver(true)
     }
@@ -133,6 +139,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 //set up game
 scene.setBackgroundImage(assets.image`cloudyBackground`)
 
+// initialize level
 info.setLife(3)
 startLevel()
 
@@ -147,8 +154,9 @@ function getOverlappingByKind(sprite: Sprite, kind: number) {
 let Attacking = false
 let CanAttack = true
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (Attacking || !CanAttack) { return }
+    if (Attacking || !CanAttack) { return } // dont attack if can't attack or currently attacking
 
+    // cooldown
     Attacking = true;
     CanAttack = false;
     setTimeout(() => {
@@ -158,6 +166,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }, attacklength)
 
     pause(100)
+
+    // create hitbox and kill all enemies in hitbox
     let sword = sprites.create(img`
         3 3
         3 3
@@ -178,10 +188,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
 })
 
-
+// map of player animations
 const AnimationMap = {
-    "SetType": "position",
-
     "grounded": {
         "left": {
             "moving": assets.animation`playerWalkLeft`,
@@ -222,6 +230,7 @@ function playAnimation(anim: Image[], speed: number, loop: boolean) {
     // setTimeout is used because pause() will literally yield the game update since i can't make this function async
 
     setTimeout(() => {
+        // reset to last looping animation
         CurrentAnimation = []
         animation.runImageAnimation(playerSprite, CurrentLoopingAnimation, CurrentLoopSpeed, true)
     }, speed * anim.length)
@@ -231,15 +240,14 @@ let FacingDirection = 1;
 function updateAnimation() {
     if (VelocityDirection != 0) { FacingDirection = VelocityDirection }
 
-    let grounded = playerSprite.isHittingTile(CollisionDirection.Bottom)
-
-    let anims: any = AnimationMap[Attacking ? "attacking" : (grounded ? "grounded" : "falling")] // ternary chain go
+    // look for the animation
+    let anims: any = AnimationMap[Attacking ? "attacking" : (Grounded ? "grounded" : "falling")] // ternary chain go
     let anim: any = anims[FacingDirection == 1 ? "right" : "left"]
 
-    if (!Array.isArray(anim)) {
+    if (!Array.isArray(anim)) { // if the animation set has sub animations they're probably for idling/moving variations
         anim = anim[VelocityDirection == 0 ? "idle" : "moving"]
     }
-    playAnimation(anim, 100, !Attacking)
+    playAnimation(anim, 100, !Attacking) // play chosen animation
 }
 
 let VelocityDirection = 0
@@ -247,15 +255,15 @@ let Grounded = true
 let LastAttacking = false
 game.onUpdate(function () {
     // conditional statements
-    if (!playerSprite) { return }
+    if (!playerSprite) { return } // don't attempt anything if the player doesn't exist
 
     let grounded = playerSprite.isHittingTile(CollisionDirection.Bottom)
     if (grounded) {
-        currentjumps = 0
+        currentjumps = 0 // reset jumps if grounded
     }
 
     let vd = Math.sign(playerSprite.vx)
-    if (vd == VelocityDirection && grounded == Grounded && LastAttacking == Attacking) { return }
+    if (vd == VelocityDirection && grounded == Grounded && LastAttacking == Attacking) { return } // dont update animations if nothing has changed
     VelocityDirection = vd
     Grounded = grounded
     LastAttacking = Attacking
