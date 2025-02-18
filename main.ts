@@ -53,7 +53,7 @@ function setUp(enemyImage: Image) {
         enemy = sprites.create(enemyImage, SpriteKind.Enemy)
         tiles.placeOnTile(enemy, value)
         tiles.setTileAt(value, assets.tile`transparency16`)
-        enemy.vx = 50
+        enemy.vx = 75
         enemy.setBounceOnWall(true)
 
     }
