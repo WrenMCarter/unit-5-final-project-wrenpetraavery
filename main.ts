@@ -112,7 +112,7 @@ function startLevel() {
     let tilemaps = [
         tilemap`level1`,
         tilemap`level4`,
-        tilemap`level3`
+        tilemap`level0`
     ]
 
     if (level > 2) {
