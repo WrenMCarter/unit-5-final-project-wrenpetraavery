@@ -170,7 +170,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
     const hitEnemies = getOverlappingByKind(sword, SpriteKind.Enemy)
     sword.destroy()
-    
+
     for (const sprite of hitEnemies) {
         sprites.destroy(sprite, effects.fire, 100)
     }
