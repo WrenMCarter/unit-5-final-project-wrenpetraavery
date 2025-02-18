@@ -55,7 +55,7 @@ function setUp(enemyImage: Image) {
         tiles.setTileAt(value, assets.tile`transparency16`)
         enemy.vx = 50
         enemy.setBounceOnWall(true)
-            
+
     }
     for (let value2 of tiles.getTilesByType(assets.tile`myTile0`)) {
         collectible = sprites.create(randomCollectible(), SpriteKind.Food),
@@ -84,7 +84,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (currentjumps < jumpNumber) {
         playerSprite.vy = -Math.sqrt(2 * (gravity * jumpheight))
         currentjumps += 1
-    } 
+    }
 })
 // find the correct key for the level
 function findKey() {
@@ -156,7 +156,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         pause(attackcooldown) // we can just pause here bc this is a coroutine
         CanAttack = true
     }, attacklength)
-    
+
+    pause(100)
     let sword = sprites.create(img`
         3 3
         3 3
@@ -169,12 +170,12 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
     const hitEnemies = getOverlappingByKind(sword, SpriteKind.Enemy)
     sword.destroy()
-    pause(100)
+    
     for (const sprite of hitEnemies) {
-        sprites.destroy(sprite, effects.fire, 100) 
+        sprites.destroy(sprite, effects.fire, 100)
     }
 
-    
+
 })
 
 
@@ -204,22 +205,22 @@ const AnimationMap = {
 let CurrentLoopingAnimation: Image[] = assets.animation`playerIdleRight`
 let CurrentLoopSpeed = 100
 let CurrentAnimation: Image[] = []
-function playAnimation(anim: Image[],speed: number,loop: boolean) {
-    if (anim == CurrentLoopingAnimation || anim == CurrentAnimation) {return}
-    
+function playAnimation(anim: Image[], speed: number, loop: boolean) {
+    if (anim == CurrentLoopingAnimation || anim == CurrentAnimation) { return }
+
     if (loop) {
         CurrentLoopingAnimation = anim
         CurrentLoopSpeed = speed
     }
 
     //if (CurrentAnimation.length != 0) {return}
-    
+
     animation.runImageAnimation(playerSprite, anim, speed, loop)
-    if (loop) {return}
+    if (loop) { return }
     CurrentAnimation = anim
 
     // setTimeout is used because pause() will literally yield the game update since i can't make this function async
-    
+
     setTimeout(() => {
         CurrentAnimation = []
         animation.runImageAnimation(playerSprite, CurrentLoopingAnimation, CurrentLoopSpeed, true)
@@ -228,11 +229,11 @@ function playAnimation(anim: Image[],speed: number,loop: boolean) {
 
 let FacingDirection = 1;
 function updateAnimation() {
-    if (VelocityDirection != 0) {FacingDirection = VelocityDirection}
-    
+    if (VelocityDirection != 0) { FacingDirection = VelocityDirection }
+
     let grounded = playerSprite.isHittingTile(CollisionDirection.Bottom)
-    
-    let anims:any = AnimationMap[Attacking ? "attacking" : (grounded ? "grounded" : "falling")] // ternary chain go
+
+    let anims: any = AnimationMap[Attacking ? "attacking" : (grounded ? "grounded" : "falling")] // ternary chain go
     let anim: any = anims[FacingDirection == 1 ? "right" : "left"]
 
     if (!Array.isArray(anim)) {
@@ -254,7 +255,7 @@ game.onUpdate(function () {
     }
 
     let vd = Math.sign(playerSprite.vx)
-    if (vd == VelocityDirection && grounded == Grounded && LastAttacking == Attacking) {return}
+    if (vd == VelocityDirection && grounded == Grounded && LastAttacking == Attacking) { return }
     VelocityDirection = vd
     Grounded = grounded
     LastAttacking = Attacking
