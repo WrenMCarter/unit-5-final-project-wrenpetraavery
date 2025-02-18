@@ -4,7 +4,7 @@ let playerSprite: Sprite = null
 let endTile: Sprite = null
 let collectible: Sprite = null
 let enemy: Sprite = null
-
+let num = 1
 let level = 1
 let jumpNumber = 2
 let gravity = 600
