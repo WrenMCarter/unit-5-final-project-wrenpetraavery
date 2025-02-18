@@ -12,7 +12,6 @@ let jumpheight = 48
 let attacklength = 350
 let attackcooldown = 100
 
-
 // set up music
 music.play(music.createSong(assets.song`mySong`), music.PlaybackMode.LoopingInBackground)
 
@@ -33,7 +32,6 @@ namespace SpriteKind {
     export const key = SpriteKind.create();
     export const PlayerSword = SpriteKind.create();
 }
-
 
 // get a random collectible from an array 
 function randomCollectible() {
