@@ -12,6 +12,7 @@ let jumpheight = 48
 let attacklength = 350
 let attackcooldown = 100
 
+
 // set up music
 music.play(music.createSong(assets.song`mySong`), music.PlaybackMode.LoopingInBackground)
 
