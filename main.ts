@@ -268,9 +268,9 @@ function areSpritesNear(s1: Sprite, s2: Sprite, threshold: number) {
 }
 
 while (true) {
-    pause(1000)
+    pause(100)
     for (const enemy of sprites.allOfKind(SpriteKind.Enemy)) {
-        if (!areSpritesNear(playerSprite, enemy, 40)) { continue }
+        if (!areSpritesNear(playerSprite, enemy, 75)) { continue }
         enemy.follow(playerSprite, 75)
     }
 }
