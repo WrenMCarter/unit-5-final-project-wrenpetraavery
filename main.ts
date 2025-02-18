@@ -34,6 +34,7 @@ namespace SpriteKind {
     export const PlayerSword = SpriteKind.create();
 }
 
+
 // get a random collectible from an array 
 function randomCollectible() {
     let collectibles = [
