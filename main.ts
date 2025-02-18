@@ -262,3 +262,15 @@ game.onUpdate(function () {
 
     updateAnimation()
 })
+
+function areSpritesNear(s1: Sprite, s2: Sprite, threshold: number) {
+    return ((s1.x - s2.x) ^ 2 + (s1.y - s2.y) ^ 2) < (threshold ^ 2) // square threshold instead of taking root bc more efficient
+}
+
+while (true) {
+    pause(1000)
+    for (const enemy of sprites.allOfKind(SpriteKind.Enemy)) {
+        if (!areSpritesNear(playerSprite, enemy, 40)) { continue }
+        enemy.follow(playerSprite, 75)
+    }
+}
