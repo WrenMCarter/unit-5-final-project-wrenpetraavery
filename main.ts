@@ -115,7 +115,7 @@ function startLevel() {
         tilemap`level3`
     ]
 
-    if (level > 3) {
+    if (level > 2) {
         return game.gameOver(true)
     }
 
